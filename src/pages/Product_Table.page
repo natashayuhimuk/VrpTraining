@@ -1,0 +1,96 @@
+<apex:page controller="Product_Table_Controller">
+
+<apex:slds />
+   <!-- Product list -->
+    <style>
+    p {      
+font-weight:bold;
+font-size:20px;
+        }
+    </style>
+    <p  class = "slds-p-top_x-large ">
+        Product list
+    </p>
+       
+  <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+	<thead>
+		<tr class="slds-text-title_caps">
+			<th scope="row">
+				<div class="slds-truncate" title="Image">Image</div>
+			</th>
+            
+			<th scope="col">
+				<div class="slds-truncate" title="Name"></div>
+      		</th>
+            
+      		<th scope="col">
+                <div class="slds-truncate" title="title">title</div>
+     		</th>
+            
+      		<th scope="row">    
+        		<div class="slds-truncate" title="description">description</div>
+      		</th>
+            
+      		<th scope="col">
+        		<div class="slds-truncate" title="cost">cost</div>
+      		</th>
+            
+       		<th scope="col">
+        		<div class="slds-truncate" title=" "></div>
+     		</th>
+    	</tr>
+  	</thead>
+      
+		<apex:repeat value="{! products}"  var="pr">
+      
+ 		 <tbody>
+    			<tr>
+					<th scope="col" data-label="Image" class="slds-col slds-size_2-of-12">
+						<div class="slds-truncate" title="{!pr.Image_URL__c}">
+							<a href="{!pr.Image_URL__c}" >
+						<img src = "{!pr.Image_URL__c}" />
+					</a>
+            	</div>
+      		</th>
+        
+      			<td data-label="Name" class="slds-col slds-size_1-of-12" >
+					<div class="slds-truncate" title="{!pr.Name}">
+              			<apex:outputLink value="/apex/ProductDescription">{!pr.Name}
+                  			<apex:param name="productId"  value="{!pr.id}"/>
+             			 </apex:outputLink>
+					</div>
+                    
+     			</td>
+				<td data-label="Title" class="slds-col slds-size_1-of-12">
+        			<div class="slds-truncate" title=" ">тут будет текст текст</div>
+				</td>
+
+       			 <td data-label="description" class="slds-col slds-size_3-of-12"> 
+           			 <div class="slds-truncate" title="{!pr.Product_Description__c}" >
+                         <apex:outputText value="{!left(pr.Product_Description__c,100)}" >
+                         </apex:outputText>
+                	 </div> 
+            			<button class="slds-button" >
+                		  <apex:outputLink value="/apex/ProductDescription">more<apex:param name="productId"  value="{!pr.id}"/>
+              			  </apex:outputLink>
+            			</button>    
+        			</td>
+        
+        			<td data-label="Cost" class="slds-col slds-size_1-of-12">
+       					<div class="slds-truncate" title="{!pr.Unit_Price__c}" >{!pr.Unit_Price__c} $</div>
+     				</td>
+        
+       				<td data-label="   " class="slds-col slds-size_1-of-12">
+          				 <div class="slds-truncate" title=" ">
+                             <apex:outputLink value="../apex/Ordering">
+              					 <button class="slds-button slds-button_brand" >
+              						  Buy<apex:param name="productId"  value="{!pr.id}"/>          
+                                 </button>
+                             </apex:outputLink>
+           				 </div>
+        			</td>
+    			</tr>
+ 			</tbody>
+		</apex:repeat>   
+	</table>
+</apex:page>

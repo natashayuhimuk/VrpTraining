@@ -1,0 +1,118 @@
+<apex:page docType="html-5.0" controller="OrderingController" >
+
+    <apex:slds />
+
+    <div class="slds-grid slds-gutters" style="height: 5rem; font-size:30px; background-color: rgb(242, 247, 252);" >
+    <div class="slds-col">
+
+    	<span>
+       		 <div class="slds-align_absolute-center">
+        		Contact Information
+   			 </div>
+      	</span>
+    </div>
+  		<div class="slds-col">
+    		<span>
+        		<div class="slds-align_absolute-center" >
+        		Product Information
+   				</div>
+      		</span>
+  		</div>
+    </div>
+
+    <script type="text/javascript">
+        function check()
+        {
+            callCheck();
+            window.alert("операция проведена");
+        }
+    </script>
+
+     <apex:form >
+         <apex:actionFunction name="callCheck" action="{!getUserCreateOrder}"/>
+     <apex:pageBlock mode="edit">
+         <apex:actionRegion >
+             <div class="slds-grid slds-gutters" >
+                <div class="slds-col slds-size_1-of-2">
+                   
+                       <div class="slds-grid slds-gutters" >
+                           <div class="slds-col ">                         
+                           </div>
+                            <div class="slds-col">
+                           
+                               
+                       <br /><br />
+                       <div class="slds-align_absolute-center" >
+                           <label for = "input-first-name">First Name: </label>
+                           <div class="slds-size_1-of-2">
+                               <apex:input type="text" id="input-first-name" value="{!firstName}" />
+                           </div>
+                       </div>
+                                <div class  = "slds-p-top_x-large" />
+
+                       <div class="slds-align_absolute-center" >
+                           <label for = "input-last-name">Last Name: </label>
+                           <div class="slds-size_1-of-2">
+                               <apex:input type="text" id="input-last-name" value="{!lastName}"  />
+                           </div>
+      				  </div>
+                      <div class  = "slds-p-top_x-large" />
+
+                       <div class="slds-align_absolute-center" >
+                           <label for = "input-email">Email: </label>
+                           <div class="slds-size_1-of-2">
+                               <apex:input type="text" id="input-email" value="{!email}"  />
+         				</div>
+                           <div class  = "slds-p-top_x-large" />
+
+                       </div>
+                           
+                       </div>
+                       </div>
+                   
+                 </div>
+
+                  <div class="slds-col">
+                      
+                          <br /><br />
+                          <label>Product Name:</label>
+                          <p> {!ProductById.Name}</p>
+                          <br />
+                          <br />
+
+                          <label>Cost: </label>
+                          <p> {!ProductById.Unit_Price__c} $</p>
+                          <br />
+                          <br />
+
+                          <label for = "input-unit-amount">Unit Amount </label>
+                          <div class="slds-size_1-of-2">
+                              <apex:input type="number" id="input-unit-amount" value="{!unitAmount}"  >
+                                  <apex:actionSupport action="{!incrementTotalAmount}"  event="onchange" rerender="total-amount" />
+                              </apex:input>
+                          </div>
+                          <div class  = "slds-p-top_x-large" />
+
+                          <label>Total Amount</label><br />
+                          <apex:outputText id="total-amount" value="{!TotalAmount} $ ">
+                          </apex:outputText>
+                          <div class  = "slds-p-top_x-large" />
+                      
+                 </div>
+             </div>
+         </apex:actionRegion>
+
+         <div style="height: 180px;">
+             <div class="slds-docked-form-footer">
+                 <a href="../apex/Product_Table" >
+                     <button type="button" class="slds-button slds-button_neutral">
+                         To Shopping
+                     </button>
+                 </a>
+                 <button type="button"  class="slds-button slds-button_brand" onClick = "check();" > Buy</button>
+             </div>
+         </div>
+
+         </apex:pageBlock>
+    </apex:form>
+</apex:page>

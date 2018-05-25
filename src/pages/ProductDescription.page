@@ -1,0 +1,59 @@
+<apex:page controller="ProductDescriptionController">
+    
+    <apex:slds />
+    <div class="slds-align_absolute-center" style="height: 5rem; font-size:30px; background-color: rgb(242, 247, 252);">
+        {!ProductById.Name}
+    </div>
+    
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-2">
+            <span>
+                <div class = "slds-p-top_x-large " />
+                <div class="slds-align_absolute-center">
+                    <img src = "{!ProductById.Image_URL__c}" height = "400" width = "300" />
+                </div>
+            </span>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-2">
+            <span>
+                <div class = "slds-p-top_x-large " />
+                <p style = "font-size:16px;">
+                    AMOUNT:
+                </p> 
+                <p style ="font-weight: 520;"> {!ProductById.Units_Available__c} </p>
+                <div class = "slds-p-top_x-large " />
+            </span>
+            <span>
+                <p style = "font-size:16px;">
+                    TITLE:
+                </p>
+                <p style ="font-weight: 520;">тут текст title</p>
+                <div class = "slds-p-top_x-large " />
+            </span>
+            <span>
+                <p style = "font-size:16px;">
+                    DESCRIPTION:
+                </p>
+                <p style ="font-weight: 520;">
+                    {!ProductByID.Product_Description__c}
+                </p>
+            </span>
+        </div>
+    </div>
+    
+    <div style="height: 180px;">
+        <div class="slds-docked-form-footer">
+           <a href="../apex/Product_Table" >
+            	<button type="button" class="slds-button slds-button_neutral">
+                    To Shopping                
+           		</button>
+            </a>
+            <apex:outputLink value="/apex/Ordering">
+            <button type="button" class="slds-button slds-button_brand">Buy
+                    <apex:param name="productId"  value="{!ProductId}"/>
+                </button>
+            </apex:outputLink> 
+        </div>
+    </div>
+</apex:page>
